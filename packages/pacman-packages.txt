@@ -1,7 +1,10 @@
 android-tools
+android-sdk-build-tools
+android-sdk-platform-tools
 antigravity
 bun
 htop
+java-8-openjdk
 jdk17-openjdk
 ngrok
 nodejs

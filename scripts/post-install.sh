@@ -146,6 +146,45 @@ echo "🔄 Installing AUR packages..."
 install_packages "$AUR_PACKAGES_FILE" "yay"
 
 echo ""
+echo "🔄 Setting up Android development environment..."
+echo ""
+
+# Function to setup Android SDK
+setup_android_sdk() {
+  if command -v sdkmanager &> /dev/null; then
+    echo "📱 Setting up Android SDK..."
+    
+    # Fix ownership and permissions for Android SDK
+    if [ -d "/opt/android-sdk" ]; then
+      sudo chown -R "$USER:$USER" /opt/android-sdk
+      sudo chmod -R u+rw /opt/android-sdk
+      echo "   ✓ Fixed Android SDK permissions"
+    fi
+    
+    # Install NDK using JAVA_HOME pointing to java-8-openjdk
+    if [ -d "/usr/lib/jvm/java-8-openjdk" ]; then
+      echo "   📦 Installing Android NDK 27.1.12297006..."
+      JAVA_HOME=/usr/lib/jvm/java-8-openjdk /opt/android-sdk/tools/bin/sdkmanager "ndk;27.1.12297006"
+      echo "   ✓ Android NDK installed"
+    else
+      echo "   ⚠️  java-8-openjdk not found at /usr/lib/jvm/java-8-openjdk"
+      echo "   Install it manually or rebuild with java-8-openjdk in packages"
+    fi
+  else
+    echo "   ⚠️  sdkmanager not found. Ensure android-sdk-build-tools is installed."
+  fi
+}
+
+# Prompt to setup Android SDK
+read -p "Setup Android development environment? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  setup_android_sdk
+else
+  echo "⏭️  Skipped Android setup"
+fi
+
+echo ""
 echo "✅ Post-installation setup complete!"
 echo ""
 echo "📝 Next steps:"
