@@ -1,0 +1,6 @@
+[Added Associations]
+text/x-python=code.desktop;
+
+[Default Applications]
+inode/directory=org.kde.dolphin.desktop
+text/x-python=code.desktop;

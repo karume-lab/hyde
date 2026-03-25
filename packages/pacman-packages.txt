@@ -1,0 +1,11 @@
+android-tools
+antigravity
+bun
+htop
+jdk17-openjdk
+ngrok
+nodejs
+qbittorrent
+spotify
+visual-studio-code-bin
+vlc

@@ -1,0 +1,3 @@
+antigravity
+docker-desktop
+hyde-cli-git
